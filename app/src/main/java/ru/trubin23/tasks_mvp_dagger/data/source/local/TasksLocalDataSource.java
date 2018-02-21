@@ -7,4 +7,6 @@ import ru.trubin23.tasks_mvp_dagger.data.source.TasksDataSource;
  */
 
 public interface TasksLocalDataSource extends TasksDataSource {
+
+    void deleteAllTasks();
 }
