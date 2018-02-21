@@ -2,6 +2,9 @@ package ru.trubin23.tasks_mvp_dagger.data.source;
 
 import android.support.annotation.NonNull;
 
+import java.util.Map;
+
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import ru.trubin23.tasks_mvp_dagger.data.Task;
@@ -17,6 +20,11 @@ public class TasksRepository implements TasksDataSource {
     private final TasksDataSource mTaskRemoteDataSource;
     private final TasksLocalDataSource mTaskLocalDataSource;
 
+    private Map<String, Task> mCachedTasks;
+
+    private boolean mCacheIsDirty = false;
+
+    @Inject
     public TasksRepository(@Remote TasksDataSource taskRemoteDataSource,
                            @Local TasksLocalDataSource taskLocalDataSource) {
         mTaskRemoteDataSource = taskRemoteDataSource;
