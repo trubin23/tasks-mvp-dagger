@@ -2,6 +2,8 @@ package ru.trubin23.tasks_mvp_dagger.data.source;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -25,15 +27,36 @@ public class TasksRepository implements TasksDataSource {
     private boolean mCacheIsDirty = false;
 
     @Inject
-    public TasksRepository(@Remote TasksDataSource taskRemoteDataSource,
-                           @Local TasksLocalDataSource taskLocalDataSource) {
+    TasksRepository(@Remote TasksDataSource taskRemoteDataSource,
+                    @Local TasksLocalDataSource taskLocalDataSource) {
         mTaskRemoteDataSource = taskRemoteDataSource;
         mTaskLocalDataSource = taskLocalDataSource;
     }
 
     @Override
     public void getTasks(@NonNull LoadTasksCallback callback) {
+        if (mCachedTasks!=null && !mCacheIsDirty){
+            callback.onTasksLoaded(new ArrayList<>(mCachedTasks.values()));
+            return;
+        }
 
+        if (mCacheIsDirty){
+            getTasksFromRemoteDataSource(callback);
+            return;
+        }
+
+        mTaskLocalDataSource.getTasks(new LoadTasksCallback() {
+            @Override
+            public void onTasksLoaded(@NonNull List<Task> tasks) {
+                refreshCache(tasks);
+                callback.onTasksLoaded(tasks);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                getTasksFromRemoteDataSource(callback);
+            }
+        });
     }
 
     @Override
@@ -53,6 +76,18 @@ public class TasksRepository implements TasksDataSource {
 
     @Override
     public void deleteTask(@NonNull String taskId) {
+
+    }
+
+    public void refreshTasks(){
+        mCacheIsDirty = true;
+    }
+
+    private void getTasksFromRemoteDataSource(LoadTasksCallback callback) {
+
+    }
+
+    private void refreshCache(List<Task> tasks) {
 
     }
 }
