@@ -2,6 +2,8 @@ package ru.trubin23.tasks_mvp_dagger.data.source.remote;
 
 import android.support.annotation.NonNull;
 
+import java.util.concurrent.Executor;
+
 import javax.inject.Singleton;
 
 import ru.trubin23.tasks_mvp_dagger.data.Task;
@@ -13,6 +15,12 @@ import ru.trubin23.tasks_mvp_dagger.data.source.TasksDataSource;
 
 @Singleton
 public class TasksRemoteRepository implements TasksDataSource {
+
+    private final Executor mNetworkIO;
+
+    public TasksRemoteRepository(@NonNull Executor networkIO) {
+        mNetworkIO = networkIO;
+    }
 
     @Override
     public void getTasks(@NonNull LoadTasksCallback callback) {

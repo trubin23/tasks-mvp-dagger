@@ -9,14 +9,15 @@ import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import ru.trubin23.tasks_mvp_dagger.TasksApplication;
-import ru.trubin23.tasks_mvp_dagger.data.source.TasksRepository;
+import ru.trubin23.tasks_mvp_dagger.data.source.TasksRepositoryModule;
 
 /**
  * Created by Andrey on 22.02.2018.
  */
 
 @Singleton
-@Component(modules = {AndroidSupportInjectionModule.class})
+@Component(modules = {TasksRepositoryModule.class,
+        AndroidSupportInjectionModule.class})
 public interface AppComponent extends AndroidInjector<TasksApplication> {
 
     @Component.Builder
