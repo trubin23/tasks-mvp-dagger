@@ -17,6 +17,8 @@ import ru.trubin23.tasks_mvp_dagger.data.source.TasksRepositoryModule;
 
 @Singleton
 @Component(modules = {TasksRepositoryModule.class,
+        ApplicationModule.class,
+        ActivityBindingModule.class,
         AndroidSupportInjectionModule.class})
 public interface AppComponent extends AndroidInjector<TasksApplication> {
 
