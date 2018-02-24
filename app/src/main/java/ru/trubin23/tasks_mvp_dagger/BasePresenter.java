@@ -6,4 +6,7 @@ package ru.trubin23.tasks_mvp_dagger;
 
 public interface BasePresenter<T> {
 
+    void takeView(T view);
+
+    void dropView();
 }
