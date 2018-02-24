@@ -1,5 +1,7 @@
 package ru.trubin23.tasks_mvp_dagger.tasks;
 
+import android.support.annotation.NonNull;
+
 import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
 
 /**
@@ -9,13 +11,15 @@ import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
 @ActivityScoped
 public class TasksPresenter implements TasksContract.Presenter {
 
-    @Override
-    public void takeView(TasksContract.View view) {
+    TasksContract.View mTasksView;
 
+    @Override
+    public void takeView(@NonNull TasksContract.View view) {
+        mTasksView = view;
     }
 
     @Override
     public void dropView() {
-
+        mTasksView = null;
     }
 }
