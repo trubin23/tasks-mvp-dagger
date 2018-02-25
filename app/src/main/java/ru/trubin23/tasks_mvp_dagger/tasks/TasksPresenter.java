@@ -2,6 +2,9 @@ package ru.trubin23.tasks_mvp_dagger.tasks;
 
 import android.support.annotation.NonNull;
 
+import javax.inject.Inject;
+
+import ru.trubin23.tasks_mvp_dagger.data.source.TasksRepository;
 import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
 
 /**
@@ -11,7 +14,14 @@ import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
 @ActivityScoped
 public class TasksPresenter implements TasksContract.Presenter {
 
-    TasksContract.View mTasksView;
+    private final TasksRepository mTasksRepository;
+
+    private TasksContract.View mTasksView;
+
+    @Inject
+    TasksPresenter(@NonNull TasksRepository tasksRepository) {
+        mTasksRepository = tasksRepository;
+    }
 
     @Override
     public void takeView(@NonNull TasksContract.View view) {
