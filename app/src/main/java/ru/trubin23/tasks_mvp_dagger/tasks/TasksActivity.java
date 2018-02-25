@@ -19,13 +19,13 @@ public class TasksActivity extends DaggerAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasks_act);
 
-        TasksFragment tasksFragment =
-                (TasksFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame);
-        if (tasksFragment == null){
+        TasksFragment tasksFragment = (TasksFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.content_frame);
+        if (tasksFragment == null) {
             tasksFragment = mLazyTasksFragment.get();
-            ActivityUtils.addFragmentToActivity(
-                    getSupportFragmentManager(), tasksFragment, R.id.content_frame);
-        }
 
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                    tasksFragment, R.id.content_frame);
+        }
     }
 }

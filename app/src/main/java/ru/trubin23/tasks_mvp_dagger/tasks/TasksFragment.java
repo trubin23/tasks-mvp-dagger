@@ -1,9 +1,11 @@
 package ru.trubin23.tasks_mvp_dagger.tasks;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import ru.trubin23.tasks_mvp_dagger.R;
+import ru.trubin23.tasks_mvp_dagger.addedittask.AddEditTaskActivity;
 import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
 import ru.trubin23.tasks_mvp_dagger.tasks.tasklist.TaskItemListener;
 import ru.trubin23.tasks_mvp_dagger.tasks.tasklist.TasksAdapter;
@@ -48,6 +51,10 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mTasksAdapter);
 
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
         FloatingActionButton fab = getActivity().findViewById(R.id.fab_add_task);
         fab.setOnClickListener(v -> showAddTask());
 
@@ -70,7 +77,8 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
 
     }
 
-    private void showAddTask(){
-
+    private void showAddTask() {
+        Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
+        startActivityForResult(intent, AddEditTaskActivity.REQUEST_ADD_TASK);
     }
 }
