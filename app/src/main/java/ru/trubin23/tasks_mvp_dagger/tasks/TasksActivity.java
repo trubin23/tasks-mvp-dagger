@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import dagger.Lazy;
 import dagger.android.support.DaggerAppCompatActivity;
 import ru.trubin23.tasks_mvp_dagger.R;
-import ru.trubin23.tasks_mvp_dagger.data.Task;
 import ru.trubin23.tasks_mvp_dagger.util.ActivityUtils;
 
 public class TasksActivity extends DaggerAppCompatActivity {

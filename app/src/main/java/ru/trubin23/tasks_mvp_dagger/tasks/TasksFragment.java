@@ -3,6 +3,7 @@ package ru.trubin23.tasks_mvp_dagger.tasks;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,6 +48,9 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mTasksAdapter);
 
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab_add_task);
+        fab.setOnClickListener(v -> showAddTask());
+
         return root;
     }
 
@@ -63,6 +67,10 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
     }
 
     private void showTaskDetail(@NonNull String taskId) {
+
+    }
+
+    private void showAddTask(){
 
     }
 }

@@ -1,6 +1,5 @@
 package ru.trubin23.tasks_mvp_dagger.data.source;
 
-import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
