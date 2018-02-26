@@ -13,12 +13,12 @@ public class AddEditTaskActivity extends DaggerAppCompatActivity {
 
     public static final int REQUEST_ADD_TASK = 1;
 
-    //@Inject
+    @Inject
     AddEditTaskFragment mFragment;
 
-    //@Inject
-    //@Nullable
-    //String mTaskId;
+    @Inject
+    @Nullable
+    String mTaskId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
