@@ -19,6 +19,7 @@ import dagger.android.support.DaggerFragment;
 import ru.trubin23.tasks_mvp_dagger.R;
 import ru.trubin23.tasks_mvp_dagger.addedittask.AddEditTaskActivity;
 import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
+import ru.trubin23.tasks_mvp_dagger.taskdetail.TaskDetailActivity;
 import ru.trubin23.tasks_mvp_dagger.tasks.tasklist.TaskItemListener;
 import ru.trubin23.tasks_mvp_dagger.tasks.tasklist.TasksAdapter;
 
@@ -74,7 +75,9 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
     }
 
     private void showTaskDetail(@NonNull String taskId) {
-
+        Intent intent = new Intent(getContext(), TaskDetailActivity.class);
+        intent.putExtra(TaskDetailActivity.EXTRA_TASK_ID, taskId);
+        startActivity(intent);
     }
 
     private void showAddTask() {

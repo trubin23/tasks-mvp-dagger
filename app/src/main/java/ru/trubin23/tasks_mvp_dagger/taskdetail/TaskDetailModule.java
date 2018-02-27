@@ -17,7 +17,7 @@ public abstract class TaskDetailModule {
     @ContributesAndroidInjector
     abstract TaskDetailFragment taskDetailFragment9();
 
-    //@ActivityScoped
-    //@Binds
-    //abstract TaskDetailContract.Presenter taskPresenter();
+    @ActivityScoped
+    @Binds
+    abstract TaskDetailContract.Presenter taskPresenter(TaskDetailPresenter presenter);
 }
