@@ -69,9 +69,9 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onPause() {
         mPresenter.dropView();
+        super.onPause();
     }
 
     private void showTaskDetail(@NonNull String taskId) {

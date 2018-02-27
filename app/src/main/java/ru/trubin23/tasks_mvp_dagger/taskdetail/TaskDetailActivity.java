@@ -22,7 +22,7 @@ public class TaskDetailActivity extends DaggerAppCompatActivity {
 
         TaskDetailFragment taskDetailFragment = (TaskDetailFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.content_frame);
-        if (taskDetailFragment == null){
+        if (taskDetailFragment == null) {
             taskDetailFragment = mFragment;
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                     taskDetailFragment, R.id.content_frame);
