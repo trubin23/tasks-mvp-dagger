@@ -10,7 +10,7 @@ import ru.trubin23.tasks_mvp_dagger.util.ActivityUtils;
 
 public class TaskDetailActivity extends DaggerAppCompatActivity {
 
-    public static final String EXTRA_TASK_ID = "TASK_ID";
+    public static final String TASK_ID = "TASK_ID";
 
     @Inject
     TaskDetailFragment mFragment;

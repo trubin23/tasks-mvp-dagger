@@ -13,6 +13,10 @@ import ru.trubin23.tasks_mvp_dagger.di.FragmentScoped;
 @Module
 public abstract class TaskDetailModule {
 
+    static String provideTaskId(TaskDetailActivity activity){
+        return activity.getIntent().getStringExtra(TaskDetailActivity.TASK_ID);
+    }
+
     @FragmentScoped
     @ContributesAndroidInjector
     abstract TaskDetailFragment taskDetailFragment9();

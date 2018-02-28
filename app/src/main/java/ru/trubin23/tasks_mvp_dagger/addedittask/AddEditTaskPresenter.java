@@ -37,4 +37,9 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
     public void dropView() {
         mAddEditTaskView = null;
     }
+
+    @Override
+    public void saveTask(String title, String description) {
+
+    }
 }

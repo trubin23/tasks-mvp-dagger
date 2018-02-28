@@ -6,9 +6,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import ru.trubin23.tasks_mvp_dagger.R;
@@ -19,6 +21,15 @@ import ru.trubin23.tasks_mvp_dagger.R;
 
 public class TaskDetailFragment extends DaggerFragment
         implements TaskDetailContract.View {
+
+    @BindView(R.id.task_detail_title)
+    TextView mTaskTitle;
+
+    @BindView(R.id.task_detail_description)
+    TextView mTaskDescription;
+
+    @BindView(R.id.task_detail_date)
+    TextView mTaskDateOfCreate;
 
     @Inject
     TaskDetailContract.Presenter mPresenter;
@@ -35,6 +46,7 @@ public class TaskDetailFragment extends DaggerFragment
         ButterKnife.bind(this, root);
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab_edit_task);
+        fab.setOnClickListener(v -> mPresenter.editTask());
 
         return root;
     }

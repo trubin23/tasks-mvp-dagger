@@ -76,7 +76,7 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
 
     private void showTaskDetail(@NonNull String taskId) {
         Intent intent = new Intent(getContext(), TaskDetailActivity.class);
-        intent.putExtra(TaskDetailActivity.EXTRA_TASK_ID, taskId);
+        intent.putExtra(TaskDetailActivity.TASK_ID, taskId);
         startActivity(intent);
     }
 

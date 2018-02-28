@@ -20,7 +20,7 @@ public abstract class AddEditTaskModule {
     @ActivityScoped
     @Nullable
     static String provideTaskId(AddEditTaskActivity activity){
-        return activity.getIntent().getStringExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID);
+        return activity.getIntent().getStringExtra(AddEditTaskActivity.EDIT_TASK_ID);
     }
 
     @FragmentScoped

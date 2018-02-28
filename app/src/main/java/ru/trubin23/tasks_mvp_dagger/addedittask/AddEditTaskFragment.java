@@ -2,6 +2,7 @@ package ru.trubin23.tasks_mvp_dagger.addedittask;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +24,11 @@ import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
 public class AddEditTaskFragment extends DaggerFragment
         implements AddEditTaskContract.View {
 
-    public static final String ARGUMENT_EDIT_TASK_ID = "EDIT_TASK_ID";
-
     @BindView(R.id.add_task_title)
-    EditText mTitle;
+    EditText mTaskTitle;
 
     @BindView(R.id.add_task_description)
-    EditText mDescription;
+    EditText mTaskDescription;
 
     @Inject
     AddEditTaskContract.Presenter mPresenter;
@@ -44,6 +43,11 @@ public class AddEditTaskFragment extends DaggerFragment
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.addtask_frag, container, false);
         ButterKnife.bind(this, root);
+
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab_edit_task_done);
+        fab.setOnClickListener(v -> mPresenter.saveTask(
+                mTaskTitle.getText().toString(),
+                mTaskDescription.getText().toString()));
 
         return root;
     }

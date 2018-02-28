@@ -1,5 +1,7 @@
 package ru.trubin23.tasks_mvp_dagger.addedittask;
 
+import android.support.annotation.NonNull;
+
 import ru.trubin23.tasks_mvp_dagger.BasePresenter;
 import ru.trubin23.tasks_mvp_dagger.BaseView;
 
@@ -15,5 +17,6 @@ public interface AddEditTaskContract {
 
     interface Presenter extends BasePresenter<View> {
 
+        void saveTask(@NonNull String title, @NonNull String description);
     }
 }
