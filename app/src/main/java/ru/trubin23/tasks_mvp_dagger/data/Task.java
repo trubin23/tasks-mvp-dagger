@@ -7,9 +7,12 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.google.common.base.Strings;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by Andrey on 19.02.2018.
@@ -51,6 +54,10 @@ public final class Task {
         }
     }
 
+    public Task(@NonNull String title, @NonNull String description){
+        this(title, description, UUID.randomUUID().toString(), null);
+    }
+
     @NonNull
     public String getId() {
         return mId;
@@ -69,5 +76,10 @@ public final class Task {
     @NonNull
     public String getDateOfCreation() {
         return mDateOfCreation;
+    }
+
+    public boolean isEmpty(){
+        return Strings.isNullOrEmpty(mTitle) &&
+                Strings.isNullOrEmpty(mDescription);
     }
 }

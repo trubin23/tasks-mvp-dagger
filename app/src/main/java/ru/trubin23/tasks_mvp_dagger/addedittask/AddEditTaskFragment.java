@@ -1,8 +1,10 @@
 package ru.trubin23.tasks_mvp_dagger.addedittask;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,5 +64,16 @@ public class AddEditTaskFragment extends DaggerFragment
     public void onPause() {
         mPresenter.dropView();
         super.onPause();
+    }
+
+    @Override
+    public void showEmptyTaskError() {
+        Snackbar.make(mTaskTitle, R.string.empty_task_message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTaskList() {
+        getActivity().setResult(Activity.RESULT_OK);
+        getActivity().finish();
     }
 }

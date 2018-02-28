@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import javax.inject.Inject;
 
+import ru.trubin23.tasks_mvp_dagger.data.Task;
 import ru.trubin23.tasks_mvp_dagger.data.source.TasksDataSource;
 import ru.trubin23.tasks_mvp_dagger.data.source.TasksRepository;
 import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
@@ -38,8 +39,34 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
         mAddEditTaskView = null;
     }
 
+    private boolean isNewTask() {
+        return mTaskId == null;
+    }
+
     @Override
-    public void saveTask(String title, String description) {
+    public void saveTask(@NonNull String title, @NonNull String description) {
+        if (isNewTask()) {
+            createTask(title, description);
+        } else {
+            updateTask(title, description);
+        }
+    }
+
+    private void createTask(@NonNull String title, @NonNull String description) {
+        Task task = new Task(title, description);
+        if (task.isEmpty()) {
+            if (mAddEditTaskView != null){
+                mAddEditTaskView.showEmptyTaskError();
+            }
+        } else {
+            mTasksRepository.saveTask(task);
+            if (mAddEditTaskView != null){
+                mAddEditTaskView.showTaskList();
+            }
+        }
+    }
+
+    private void updateTask(@NonNull String title, @NonNull String description) {
 
     }
 }
