@@ -2,8 +2,12 @@ package ru.trubin23.tasks_mvp_dagger.tasks;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import ru.trubin23.tasks_mvp_dagger.data.Task;
+import ru.trubin23.tasks_mvp_dagger.data.source.TasksDataSource;
 import ru.trubin23.tasks_mvp_dagger.data.source.TasksRepository;
 import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
 
@@ -11,7 +15,6 @@ import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
  * Created by Andrey on 19.02.2018.
  */
 
-@ActivityScoped
 public class TasksPresenter implements TasksContract.Presenter {
 
     private final TasksRepository mTasksRepository;
@@ -26,10 +29,25 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void takeView(@NonNull TasksContract.View view) {
         mTasksView = view;
+        loadTasks();
     }
 
     @Override
     public void dropView() {
         mTasksView = null;
+    }
+
+    public void loadTasks() {
+        mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
+            @Override
+            public void onTasksLoaded(@NonNull List<Task> tasks) {
+                
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
     }
 }

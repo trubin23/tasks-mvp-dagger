@@ -15,5 +15,6 @@ public interface TasksContract {
 
     interface Presenter extends BasePresenter<View> {
 
+        void loadTasks();
     }
 }

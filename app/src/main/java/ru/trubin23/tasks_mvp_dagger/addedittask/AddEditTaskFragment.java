@@ -22,7 +22,6 @@ import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
  * Created by Andrey on 25.02.2018.
  */
 
-@ActivityScoped
 public class AddEditTaskFragment extends DaggerFragment
         implements AddEditTaskContract.View {
 

@@ -27,7 +27,6 @@ import ru.trubin23.tasks_mvp_dagger.tasks.tasklist.TasksAdapter;
  * Created by Andrey on 19.02.2018.
  */
 
-@ActivityScoped
 public class TasksFragment extends DaggerFragment implements TasksContract.View {
 
     private TasksAdapter mTasksAdapter;

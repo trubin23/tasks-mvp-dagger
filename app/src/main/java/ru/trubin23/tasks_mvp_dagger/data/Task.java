@@ -54,6 +54,7 @@ public final class Task {
         }
     }
 
+    @Ignore
     public Task(@NonNull String title, @NonNull String description){
         this(title, description, UUID.randomUUID().toString(), null);
     }
@@ -79,7 +80,7 @@ public final class Task {
     }
 
     public boolean isEmpty(){
-        return Strings.isNullOrEmpty(mTitle) &&
+        return Strings.isNullOrEmpty(mTitle) ||
                 Strings.isNullOrEmpty(mDescription);
     }
 }
