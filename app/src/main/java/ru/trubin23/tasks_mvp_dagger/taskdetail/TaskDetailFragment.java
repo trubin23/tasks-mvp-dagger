@@ -1,6 +1,7 @@
 package ru.trubin23.tasks_mvp_dagger.taskdetail;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -61,5 +62,25 @@ public class TaskDetailFragment extends DaggerFragment
     public void onPause() {
         mPresenter.dropView();
         super.onPause();
+    }
+
+    @Override
+    public void showMissingTask() {
+
+    }
+
+    @Override
+    public void setTitle(@NonNull String title) {
+
+    }
+
+    @Override
+    public void setDescription(@NonNull String description) {
+
+    }
+
+    @Override
+    public void setDateOfCreation(@NonNull String dateOfCreation) {
+
     }
 }
