@@ -90,7 +90,7 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
 
     @Override
     public void showTasks(@NonNull List<Task> tasks) {
-        mTasksAdapter.setTasks(tasks);
+        getActivity().runOnUiThread(() -> mTasksAdapter.setTasks(tasks));
     }
 
     @Override
