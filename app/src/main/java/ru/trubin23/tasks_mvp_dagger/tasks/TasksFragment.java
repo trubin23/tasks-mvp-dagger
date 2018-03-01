@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,12 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import ru.trubin23.tasks_mvp_dagger.R;
 import ru.trubin23.tasks_mvp_dagger.addedittask.AddEditTaskActivity;
+import ru.trubin23.tasks_mvp_dagger.data.Task;
 import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
 import ru.trubin23.tasks_mvp_dagger.taskdetail.TaskDetailActivity;
 import ru.trubin23.tasks_mvp_dagger.tasks.tasklist.TaskItemListener;
@@ -82,5 +86,22 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
     private void showAddTask() {
         Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
         startActivityForResult(intent, AddEditTaskActivity.REQUEST_ADD_TASK);
+    }
+
+    @Override
+    public void showTasks(@NonNull List<Task> tasks) {
+        mTasksAdapter.setTasks(tasks);
+    }
+
+    @Override
+    public void showLoadingTasksError() {
+        showMessage(getString(R.string.loading_tasks_error));
+    }
+
+    private void showMessage(String message) {
+        View view = getView();
+        if (view != null) {
+            Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
+        }
     }
 }

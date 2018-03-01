@@ -21,6 +21,8 @@ public class TasksPresenter implements TasksContract.Presenter {
 
     private TasksContract.View mTasksView;
 
+    private boolean mRefreshTasks = true;
+
     @Inject
     TasksPresenter(@NonNull TasksRepository tasksRepository) {
         mTasksRepository = tasksRepository;
@@ -38,15 +40,20 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     public void loadTasks() {
+        if (mRefreshTasks){
+            mTasksRepository.refreshTasks();
+            mRefreshTasks = false;
+        }
+
         mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
             @Override
             public void onTasksLoaded(@NonNull List<Task> tasks) {
-                
+                mTasksView.showTasks(tasks);
             }
 
             @Override
             public void onDataNotAvailable() {
-
+                mTasksView.showLoadingTasksError();
             }
         });
     }
