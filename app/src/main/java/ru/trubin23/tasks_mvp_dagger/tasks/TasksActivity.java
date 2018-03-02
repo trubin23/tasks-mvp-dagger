@@ -1,6 +1,8 @@
 package ru.trubin23.tasks_mvp_dagger.tasks;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 
 import javax.inject.Inject;
 
@@ -18,6 +20,9 @@ public class TasksActivity extends DaggerAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasks_act);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         TasksFragment tasksFragment = (TasksFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.content_frame);

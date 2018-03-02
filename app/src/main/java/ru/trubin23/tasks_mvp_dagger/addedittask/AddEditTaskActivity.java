@@ -2,6 +2,8 @@ package ru.trubin23.tasks_mvp_dagger.addedittask;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 
 import javax.inject.Inject;
 
@@ -26,6 +28,14 @@ public class AddEditTaskActivity extends DaggerAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addtask_act);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar !=null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         AddEditTaskFragment fragment = (AddEditTaskFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.content_frame);
