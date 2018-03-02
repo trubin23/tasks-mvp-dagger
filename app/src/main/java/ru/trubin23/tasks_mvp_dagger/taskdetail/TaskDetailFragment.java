@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -65,22 +68,39 @@ public class TaskDetailFragment extends DaggerFragment
     }
 
     @Override
-    public void showMissingTask() {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.taskdetail_menu, menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_delete:
+                mPresenter.deleteTask();
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void showMissingTask() {
+        mTaskTitle.setText("");
+        mTaskDescription.setText(getString(R.string.no_data));
+        mTaskDateOfCreate.setText("");
     }
 
     @Override
     public void setTitle(@NonNull String title) {
-
+        mTaskTitle.setText(title);
     }
 
     @Override
     public void setDescription(@NonNull String description) {
-
+        mTaskDescription.setText(description);
     }
 
     @Override
     public void setDateOfCreation(@NonNull String dateOfCreation) {
-
+        mTaskDateOfCreate.setText(dateOfCreation);
     }
 }

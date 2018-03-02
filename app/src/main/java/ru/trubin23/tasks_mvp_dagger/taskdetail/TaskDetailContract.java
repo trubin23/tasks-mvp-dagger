@@ -25,5 +25,7 @@ public interface TaskDetailContract {
     interface Presenter extends BasePresenter<View> {
 
         void editTask();
+
+        void deleteTask();
     }
 }

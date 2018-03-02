@@ -25,7 +25,7 @@ public class TaskDetailActivity extends DaggerAppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar !=null) {
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }

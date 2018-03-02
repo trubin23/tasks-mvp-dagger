@@ -4,4 +4,6 @@
     <string name="description">Enter your task here.</string>
     <string name="empty_task_message">Task cannot be empty</string>
     <string name="loading_tasks_error">Error while loading tasks</string>
+    <string name="menu_delete_task">Delete task</string>
+    <string name="no_data">No data</string>
 </resources>
