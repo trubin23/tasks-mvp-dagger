@@ -24,6 +24,7 @@ import ru.trubin23.tasks_mvp_dagger.addedittask.AddEditTaskActivity;
 import ru.trubin23.tasks_mvp_dagger.data.Task;
 import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
 import ru.trubin23.tasks_mvp_dagger.taskdetail.TaskDetailActivity;
+import ru.trubin23.tasks_mvp_dagger.tasks.tasklist.DividerItemVertical;
 import ru.trubin23.tasks_mvp_dagger.tasks.tasklist.TaskItemListener;
 import ru.trubin23.tasks_mvp_dagger.tasks.tasklist.TasksAdapter;
 
@@ -55,9 +56,9 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mTasksAdapter);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                recyclerView.getContext(), DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
+        DividerItemVertical dividerItemVertical =
+                new DividerItemVertical(recyclerView.getContext());
+        recyclerView.addItemDecoration(dividerItemVertical);
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab_add_task);
         fab.setOnClickListener(v -> showAddTask());
