@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -55,11 +56,11 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksHolder>
 
     class TasksHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.item_completed)
+        CheckBox mCompletedCB;
+
         @BindView(R.id.item_title)
         TextView mTitleTV;
-
-        @BindView(R.id.item_date)
-        TextView mDateTV;
 
         TasksHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,7 +69,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksHolder>
 
         void setTask(@NonNull Task task) {
             mTitleTV.setText(task.getTitle());
-            mDateTV.setText(task.getDateOfCreation());
+            mCompletedCB.setChecked(task.isCompleted());
         }
     }
 }

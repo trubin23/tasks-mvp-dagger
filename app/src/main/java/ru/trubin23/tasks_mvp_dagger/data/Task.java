@@ -42,8 +42,12 @@ public final class Task {
     @ColumnInfo(name = "date-of-creation")
     private final String mDateOfCreation;
 
+    @ColumnInfo(name = "completed")
+    private final boolean mCompleted;
+
     public Task(@NonNull String title, @NonNull String description,
-                @NonNull String id, @Nullable String dateOfCreation) {
+                @NonNull String id, @Nullable String dateOfCreation,
+                boolean completed) {
         mId = id;
         mTitle = title;
         mDescription = description;
@@ -52,11 +56,13 @@ public final class Task {
         } else{
             mDateOfCreation = DATE_FORMAT.format(new Date());
         }
+        mCompleted = completed;
     }
 
     @Ignore
     public Task(@NonNull String title, @NonNull String description){
-        this(title, description, UUID.randomUUID().toString(), null);
+        this(title, description, UUID.randomUUID().toString(),
+                null, false);
     }
 
     @NonNull
@@ -77,6 +83,10 @@ public final class Task {
     @NonNull
     public String getDateOfCreation() {
         return mDateOfCreation;
+    }
+
+    public boolean isCompleted() {
+        return mCompleted;
     }
 
     public boolean isEmpty(){
