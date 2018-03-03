@@ -20,6 +20,10 @@ public interface TaskDetailContract {
         void setDescription(@NonNull String description);
 
         void setDateOfCreation(@NonNull String dateOfCreation);
+
+        void showEditTask(@NonNull String taskId);
+
+        void showTaskDeleted(@NonNull String taskId);
     }
 
     interface Presenter extends BasePresenter<View> {

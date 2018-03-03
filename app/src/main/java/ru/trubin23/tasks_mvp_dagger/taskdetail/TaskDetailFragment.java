@@ -1,5 +1,6 @@
 package ru.trubin23.tasks_mvp_dagger.taskdetail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import ru.trubin23.tasks_mvp_dagger.R;
+import ru.trubin23.tasks_mvp_dagger.addedittask.AddEditTaskActivity;
+import ru.trubin23.tasks_mvp_dagger.addedittask.AddEditTaskFragment;
 
 /**
  * Created by Andrey on 26.02.2018.
@@ -25,6 +28,8 @@ import ru.trubin23.tasks_mvp_dagger.R;
 
 public class TaskDetailFragment extends DaggerFragment
         implements TaskDetailContract.View {
+
+    private static final int REQUEST_EDIT_TASK = 1;
 
     @BindView(R.id.task_detail_title)
     TextView mTaskTitle;
@@ -48,6 +53,8 @@ public class TaskDetailFragment extends DaggerFragment
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.taskdetail_frag, container, false);
         ButterKnife.bind(this, root);
+
+        setHasOptionsMenu(true);
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab_edit_task);
         fab.setOnClickListener(v -> mPresenter.editTask());
@@ -74,7 +81,7 @@ public class TaskDetailFragment extends DaggerFragment
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_delete:
                 mPresenter.deleteTask();
                 return true;
@@ -102,5 +109,17 @@ public class TaskDetailFragment extends DaggerFragment
     @Override
     public void setDateOfCreation(@NonNull String dateOfCreation) {
         mTaskDateOfCreate.setText(dateOfCreation);
+    }
+
+    @Override
+    public void showEditTask(@NonNull String taskId) {
+        Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
+        intent.putExtra(AddEditTaskActivity.EDIT_TASK_ID, taskId);
+        startActivityForResult(intent, REQUEST_EDIT_TASK);
+    }
+
+    @Override
+    public void showTaskDeleted(@NonNull String taskId) {
+        getActivity().finish();
     }
 }
