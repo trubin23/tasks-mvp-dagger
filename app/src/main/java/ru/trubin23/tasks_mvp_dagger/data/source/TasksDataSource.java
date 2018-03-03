@@ -17,15 +17,15 @@ public interface TasksDataSource {
         void onTasksLoaded(@NonNull List<Task> tasks);
 
         void onDataNotAvailable();
-    }
 
+    }
     interface GetTaskCallback{
 
         void onTaskLoaded(@NonNull Task task);
 
         void onDataNotAvailable();
-    }
 
+    }
     void getTasks(@NonNull LoadTasksCallback callback);
 
     void getTask(@NonNull String taskId, @NonNull GetTaskCallback callback);
@@ -35,4 +35,6 @@ public interface TasksDataSource {
     void updateTask(@NonNull Task task);
 
     void deleteTask(@NonNull String taskId);
+
+    void completeTask(@NonNull String taskId, boolean completed);
 }

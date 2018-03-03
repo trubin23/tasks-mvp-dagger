@@ -34,4 +34,7 @@ public interface TasksDao {
 
     @Query("DELETE FROM tasks")
     void deleteTasks();
+
+    @Query("UPDATE tasks SET completed = :completed WHERE taskId = :taskId")
+    void updateCompleted(String taskId, boolean completed);
 }

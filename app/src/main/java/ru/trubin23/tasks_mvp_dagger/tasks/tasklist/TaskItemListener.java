@@ -9,4 +9,6 @@ import android.support.annotation.NonNull;
 public interface TaskItemListener {
 
     void onTaskClick(@NonNull String taskId);
+
+    void onChangeCompletedTask(@NonNull String taskId, boolean completed);
 }

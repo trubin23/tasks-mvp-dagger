@@ -103,6 +103,12 @@ public class TasksRepository implements TasksDataSource {
         }
     }
 
+    @Override
+    public void completeTask(@NonNull String taskId, boolean completed) {
+        mTaskRemoteDataSource.completeTask(taskId, completed);
+        mTaskLocalDataSource.completeTask(taskId, completed);
+    }
+
     public void refreshTasks() {
         mCacheIsDirty = true;
     }

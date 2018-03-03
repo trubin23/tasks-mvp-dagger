@@ -46,4 +46,9 @@ public class TasksRemoteRepository implements TasksDataSource {
     public void deleteTask(@NonNull String taskId) {
 
     }
+
+    @Override
+    public void completeTask(@NonNull String taskId, boolean completed) {
+
+    }
 }

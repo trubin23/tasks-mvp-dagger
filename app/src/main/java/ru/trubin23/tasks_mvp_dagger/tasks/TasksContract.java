@@ -24,5 +24,7 @@ public interface TasksContract {
     interface Presenter extends BasePresenter<View> {
 
         void loadTasks();
+
+        void changeCompletedTask(@NonNull String taskId, boolean completed);
     }
 }

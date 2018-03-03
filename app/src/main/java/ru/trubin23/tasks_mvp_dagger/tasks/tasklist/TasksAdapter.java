@@ -42,6 +42,9 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksHolder>
         Task task = mTasks.get(position);
         holder.setTask(task);
         holder.itemView.setOnClickListener(v -> mTaskItemListener.onTaskClick(task.getId()));
+        CheckBox checkBox = holder.itemView.findViewById(R.id.item_completed);
+        checkBox.setOnClickListener(v ->
+                mTaskItemListener.onChangeCompletedTask(task.getId(), checkBox.isChecked()));
     }
 
     @Override
@@ -68,8 +71,8 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksHolder>
         }
 
         void setTask(@NonNull Task task) {
-            mTitleTV.setText(task.getTitle());
             mCompletedCB.setChecked(task.isCompleted());
+            mTitleTV.setText(task.getTitle());
         }
     }
 }
