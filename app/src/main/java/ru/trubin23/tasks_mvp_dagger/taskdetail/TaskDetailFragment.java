@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -39,6 +40,9 @@ public class TaskDetailFragment extends DaggerFragment
 
     @BindView(R.id.task_detail_date)
     TextView mTaskDateOfCreate;
+
+    @BindView(R.id.task_detail_completed)
+    CheckBox mTaskCompleted;
 
     @Inject
     TaskDetailContract.Presenter mPresenter;
@@ -94,6 +98,8 @@ public class TaskDetailFragment extends DaggerFragment
         mTaskTitle.setText("");
         mTaskDescription.setText(getString(R.string.no_data));
         mTaskDateOfCreate.setText("");
+        mTaskCompleted.setChecked(false);
+        mTaskCompleted.setEnabled(false);
     }
 
     @Override
@@ -109,6 +115,11 @@ public class TaskDetailFragment extends DaggerFragment
     @Override
     public void setDateOfCreation(@NonNull String dateOfCreation) {
         mTaskDateOfCreate.setText(dateOfCreation);
+    }
+
+    @Override
+    public void setComplete(boolean completed) {
+        mTaskCompleted.setChecked(completed);
     }
 
     @Override

@@ -74,6 +74,6 @@ public class TasksLocalRepository implements TasksLocalDataSource {
 
     @Override
     public void completeTask(@NonNull String taskId, boolean completed) {
-
+        mDiskIO.execute(() -> mTasksDao.updateCompleted(taskId, completed));
     }
 }

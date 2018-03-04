@@ -21,6 +21,8 @@ public interface TaskDetailContract {
 
         void setDateOfCreation(@NonNull String dateOfCreation);
 
+        void setComplete(boolean completed);
+
         void showEditTask(@NonNull String taskId);
 
         void showTaskDeleted(@NonNull String taskId);

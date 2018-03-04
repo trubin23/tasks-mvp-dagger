@@ -53,6 +53,7 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
                 mTaskDetailView.setTitle(task.getTitle());
                 mTaskDetailView.setDescription(task.getDescription());
                 mTaskDetailView.setDateOfCreation(task.getDateOfCreation());
+                mTaskDetailView.setComplete(task.isCompleted());
             }
 
             @Override
