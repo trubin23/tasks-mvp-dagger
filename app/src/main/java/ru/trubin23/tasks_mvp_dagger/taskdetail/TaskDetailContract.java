@@ -33,5 +33,7 @@ public interface TaskDetailContract {
         void editTask();
 
         void deleteTask();
+
+        void changeCompletedTask(boolean completed);
     }
 }

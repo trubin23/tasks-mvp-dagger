@@ -2,6 +2,7 @@ package ru.trubin23.tasks_mvp_dagger.addedittask;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,7 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import ru.trubin23.tasks_mvp_dagger.R;
-import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
 
 /**
  * Created by Andrey on 25.02.2018.
@@ -74,5 +74,15 @@ public class AddEditTaskFragment extends DaggerFragment
     public void showTaskList() {
         getActivity().setResult(Activity.RESULT_OK);
         getActivity().finish();
+    }
+
+    @Override
+    public void setTitle(@NonNull String title) {
+        mTaskTitle.setText(title);
+    }
+
+    @Override
+    public void setDescription(@NonNull String description) {
+        mTaskDescription.setText(description);
     }
 }

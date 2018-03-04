@@ -21,7 +21,6 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import ru.trubin23.tasks_mvp_dagger.R;
 import ru.trubin23.tasks_mvp_dagger.addedittask.AddEditTaskActivity;
-import ru.trubin23.tasks_mvp_dagger.addedittask.AddEditTaskFragment;
 
 /**
  * Created by Andrey on 26.02.2018.
@@ -59,6 +58,9 @@ public class TaskDetailFragment extends DaggerFragment
         ButterKnife.bind(this, root);
 
         setHasOptionsMenu(true);
+
+        mTaskCompleted.setOnCheckedChangeListener((buttonView, isChecked) ->
+            mPresenter.changeCompletedTask(isChecked));
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab_edit_task);
         fab.setOnClickListener(v -> mPresenter.editTask());

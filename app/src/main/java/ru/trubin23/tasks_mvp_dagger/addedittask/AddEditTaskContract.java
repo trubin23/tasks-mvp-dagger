@@ -16,6 +16,10 @@ public interface AddEditTaskContract {
         void showEmptyTaskError();
 
         void showTaskList();
+
+        void setTitle(@NonNull String title);
+
+        void setDescription(@NonNull String description);
     }
 
     interface Presenter extends BasePresenter<View> {

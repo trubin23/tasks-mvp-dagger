@@ -60,6 +60,12 @@ public final class Task {
     }
 
     @Ignore
+    public Task(@NonNull String title, @NonNull String description,
+                @NonNull String taskId){
+        this(title, description, taskId, null, false);
+    }
+
+    @Ignore
     public Task(@NonNull String title, @NonNull String description){
         this(title, description, UUID.randomUUID().toString(),
                 null, false);

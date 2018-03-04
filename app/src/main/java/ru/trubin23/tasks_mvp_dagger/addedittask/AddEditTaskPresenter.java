@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import ru.trubin23.tasks_mvp_dagger.data.Task;
 import ru.trubin23.tasks_mvp_dagger.data.source.TasksDataSource;
 import ru.trubin23.tasks_mvp_dagger.data.source.TasksRepository;
-import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
 
 /**
  * Created by Andrey on 25.02.2018.
@@ -31,11 +30,35 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
     @Override
     public void takeView(@NonNull AddEditTaskContract.View view) {
         mAddEditTaskView = view;
+        populateTask();
     }
 
     @Override
     public void dropView() {
         mAddEditTaskView = null;
+    }
+
+    private void populateTask() {
+        if (isNewTask()) {
+            return;
+        }
+
+        mTasksRepository.getTask(mTaskId, new TasksDataSource.GetTaskCallback() {
+            @Override
+            public void onTaskLoaded(@NonNull Task task) {
+                if (mAddEditTaskView != null) {
+                    mAddEditTaskView.setTitle(task.getTitle());
+                    mAddEditTaskView.setDescription(task.getDescription());
+                }
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                if (mAddEditTaskView != null) {
+                    mAddEditTaskView.showEmptyTaskError();
+                }
+            }
+        });
     }
 
     private boolean isNewTask() {
@@ -44,28 +67,22 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
 
     @Override
     public void saveTask(@NonNull String title, @NonNull String description) {
+        Task task;
         if (isNewTask()) {
-            createTask(title, description);
+            task = new Task(title, description);
         } else {
-            updateTask(title, description);
+            task = new Task(title, description, mTaskId);
         }
-    }
 
-    private void createTask(@NonNull String title, @NonNull String description) {
-        Task task = new Task(title, description);
         if (task.isEmpty()) {
-            if (mAddEditTaskView != null){
+            if (mAddEditTaskView != null) {
                 mAddEditTaskView.showEmptyTaskError();
             }
         } else {
             mTasksRepository.saveTask(task);
-            if (mAddEditTaskView != null){
+            if (mAddEditTaskView != null) {
                 mAddEditTaskView.showTaskList();
             }
         }
-    }
-
-    private void updateTask(@NonNull String title, @NonNull String description) {
-
     }
 }

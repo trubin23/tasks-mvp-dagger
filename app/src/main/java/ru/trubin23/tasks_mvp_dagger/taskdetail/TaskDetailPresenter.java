@@ -24,8 +24,8 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
     private TaskDetailContract.View mTaskDetailView;
 
     @Inject
-    public TaskDetailPresenter(@Nullable String taskId,
-                               @NonNull TasksRepository tasksRepository) {
+    TaskDetailPresenter(@Nullable String taskId,
+                        @NonNull TasksRepository tasksRepository) {
         mTaskId = taskId;
         mTasksRepository = tasksRepository;
     }
@@ -42,51 +42,64 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
     }
 
     private void openTask() {
-        if (Strings.isNullOrEmpty(mTaskId)){
-            mTaskDetailView.showMissingTask();
+        if (Strings.isNullOrEmpty(mTaskId)) {
+            if (mTaskDetailView != null) {
+                mTaskDetailView.showMissingTask();
+            }
             return;
         }
 
         mTasksRepository.getTask(mTaskId, new TasksDataSource.GetTaskCallback() {
             @Override
             public void onTaskLoaded(@NonNull Task task) {
-                mTaskDetailView.setTitle(task.getTitle());
-                mTaskDetailView.setDescription(task.getDescription());
-                mTaskDetailView.setDateOfCreation(task.getDateOfCreation());
-                mTaskDetailView.setComplete(task.isCompleted());
+                if (mTaskDetailView != null) {
+                    mTaskDetailView.setTitle(task.getTitle());
+                    mTaskDetailView.setDescription(task.getDescription());
+                    mTaskDetailView.setDateOfCreation(task.getDateOfCreation());
+                    mTaskDetailView.setComplete(task.isCompleted());
+                }
             }
 
             @Override
             public void onDataNotAvailable() {
-                mTaskDetailView.showMissingTask();
+                if (mTaskDetailView != null) {
+                    mTaskDetailView.showMissingTask();
+                }
             }
         });
     }
 
     @Override
     public void editTask() {
-        if (Strings.isNullOrEmpty(mTaskId)){
-            if (mTaskDetailView != null){
+        if (Strings.isNullOrEmpty(mTaskId)) {
+            if (mTaskDetailView != null) {
                 mTaskDetailView.showMissingTask();
             }
             return;
         }
-        if (mTaskDetailView != null){
+        if (mTaskDetailView != null) {
             mTaskDetailView.showEditTask(mTaskId);
         }
     }
 
     @Override
     public void deleteTask() {
-        if (Strings.isNullOrEmpty(mTaskId)){
-            if (mTaskDetailView != null){
+        if (Strings.isNullOrEmpty(mTaskId)) {
+            if (mTaskDetailView != null) {
                 mTaskDetailView.showMissingTask();
             }
             return;
         }
         mTasksRepository.deleteTask(mTaskId);
-        if (mTaskDetailView != null){
+        if (mTaskDetailView != null) {
             mTaskDetailView.showTaskDeleted(mTaskId);
+        }
+    }
+
+    @Override
+    public void changeCompletedTask(boolean completed) {
+        if (mTaskId != null) {
+            mTasksRepository.completeTask(mTaskId, completed);
         }
     }
 }

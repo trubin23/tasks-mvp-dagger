@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import ru.trubin23.tasks_mvp_dagger.data.Task;
 import ru.trubin23.tasks_mvp_dagger.data.source.TasksDataSource;
 import ru.trubin23.tasks_mvp_dagger.data.source.TasksRepository;
-import ru.trubin23.tasks_mvp_dagger.di.ActivityScoped;
 
 /**
  * Created by Andrey on 19.02.2018.
@@ -40,7 +39,7 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     public void loadTasks() {
-        if (mRefreshTasks){
+        if (mRefreshTasks) {
             mTasksRepository.refreshTasks();
             mRefreshTasks = false;
         }
@@ -48,12 +47,16 @@ public class TasksPresenter implements TasksContract.Presenter {
         mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
             @Override
             public void onTasksLoaded(@NonNull List<Task> tasks) {
-                mTasksView.showTasks(tasks);
+                if (mTasksView != null) {
+                    mTasksView.showTasks(tasks);
+                }
             }
 
             @Override
             public void onDataNotAvailable() {
-                mTasksView.showLoadingTasksError();
+                if (mTasksView != null) {
+                    mTasksView.showLoadingTasksError();
+                }
             }
         });
     }
