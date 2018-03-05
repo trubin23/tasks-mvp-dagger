@@ -31,14 +31,24 @@ public class NetworkTask {
     @Expose
     private Byte mCompleted;
 
-    NetworkTask(@NonNull String title, @NonNull String description,
-                @NonNull String id, @NonNull String dateOfCreation,
+    NetworkTask(@NonNull String id, @NonNull String title,
+                @NonNull String description, @NonNull String dateOfCreation,
                 @NonNull Byte completed) {
         mId = id;
         mTitle = title;
         mDescription = description;
         mDateOfCreation = dateOfCreation;
         mCompleted = completed;
+    }
+
+    NetworkTask(@NonNull String id, @NonNull String title,
+                @NonNull String description, @NonNull String dateOfCreation,
+                boolean completed) {
+        mId = id;
+        mTitle = title;
+        mDescription = description;
+        mDateOfCreation = dateOfCreation;
+        mCompleted = (byte) (completed ? 1 : 0);
     }
 
     @NonNull
