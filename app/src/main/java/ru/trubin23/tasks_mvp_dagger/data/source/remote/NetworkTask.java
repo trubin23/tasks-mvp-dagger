@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Andrey on 04.03.2018.
  */
 
-public class NetworkTask {
+class NetworkTask {
 
     @SerializedName("id")
     @Expose
