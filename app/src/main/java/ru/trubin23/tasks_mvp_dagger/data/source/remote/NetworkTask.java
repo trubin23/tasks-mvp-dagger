@@ -41,43 +41,48 @@ public class NetworkTask {
         mCompleted = completed;
     }
 
+    @NonNull
     String getId() {
         return mId;
     }
 
-    void setId(String id) {
+    void setId(@NonNull String id) {
         mId = id;
     }
 
+    @NonNull
     String getTitle() {
         return mTitle;
     }
 
-    void setTitle(String title) {
+    void setTitle(@NonNull String title) {
         mTitle = title;
     }
 
+    @NonNull
     String getDescription() {
         return mDescription;
     }
 
-    void setDescription(String description) {
+    void setDescription(@NonNull String description) {
         mDescription = description;
     }
 
+    @NonNull
     String getDateOfCreation() {
         return mDateOfCreation;
     }
 
-    void setDateOfCreation(String dateOfCreation) {
+    void setDateOfCreation(@NonNull String dateOfCreation) {
         mDateOfCreation = dateOfCreation;
     }
 
+    @NonNull
     Byte getCompleted() {
         return mCompleted;
     }
 
-    void setCompleted(Byte completed) {
+    void setCompleted(@NonNull Byte completed) {
         mCompleted = completed;
     }
 }
