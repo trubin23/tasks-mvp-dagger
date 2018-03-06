@@ -6,4 +6,7 @@
     <string name="loading_tasks_error">Error while loading tasks</string>
     <string name="menu_delete_task">Delete task</string>
     <string name="no_data">No data</string>
+    <string name="menu_filter">Filter</string>
+    <string name="menu_clear">Clear completed</string>
+    <string name="menu_refresh">Refresh</string>
 </resources>
