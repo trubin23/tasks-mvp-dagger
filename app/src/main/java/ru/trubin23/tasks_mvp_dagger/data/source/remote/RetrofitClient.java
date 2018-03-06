@@ -51,6 +51,12 @@ class RetrofitClient {
         remoteService.updateTask(task.getId(), task).enqueue(callback);
     }
 
+    static void completeTask(@NonNull String taskId, @NonNull StatusOfTask statusOfTask,
+                             @NonNull Callback<NetworkTask> callback){
+        RemoteService remoteService = getRemoteService();
+        remoteService.completeTask(taskId, statusOfTask).enqueue(callback);
+    }
+
     static void deleteTask(@NonNull String taskId, @NonNull Callback<NetworkTask> callback) {
         RemoteService remoteService = getRemoteService();
         remoteService.deleteTask(taskId).enqueue(callback);

@@ -38,7 +38,6 @@ public class TasksRemoteRepository implements TasksDataSource {
                         callback.onDataNotAvailable();
                     }
                 }));
-        callback.onDataNotAvailable();
     }
 
     @Override
@@ -82,6 +81,9 @@ public class TasksRemoteRepository implements TasksDataSource {
 
     @Override
     public void completeTask(@NonNull String taskId, boolean completed) {
+        StatusOfTask statusOfTask = new StatusOfTask(completed);
 
+        mNetworkIO.execute(() -> RetrofitClient.completeTask(
+                taskId, statusOfTask, new ProcessingResponse<>()));
     }
 }

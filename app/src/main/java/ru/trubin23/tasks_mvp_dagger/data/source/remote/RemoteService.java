@@ -28,6 +28,9 @@ interface RemoteService {
     @PUT("/api_dagger/tasks/{id}")
     Call<NetworkTask> updateTask(@Path("id") String id, @Body NetworkTask task);
 
+    @PUT("/api_dagger/tasks/{id}")
+    Call<NetworkTask> completeTask(@Path("id") String id, @Body StatusOfTask task);
+
     @DELETE("/api_dagger/tasks/{id}")
     Call<NetworkTask> deleteTask(@Path("id") String id);
 }
