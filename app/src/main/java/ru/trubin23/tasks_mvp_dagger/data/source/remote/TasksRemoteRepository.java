@@ -7,9 +7,6 @@ import java.util.concurrent.Executor;
 
 import javax.inject.Singleton;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import ru.trubin23.tasks_mvp_dagger.data.Task;
 import ru.trubin23.tasks_mvp_dagger.data.source.TasksDataSource;
 
@@ -80,7 +77,7 @@ public class TasksRemoteRepository implements TasksDataSource {
     @Override
     public void deleteTask(@NonNull String taskId) {
         mNetworkIO.execute(() ->
-                RetrofitClient.daleteTask(taskId, new ProcessingResponse<>()));
+                RetrofitClient.deleteTask(taskId, new ProcessingResponse<>()));
     }
 
     @Override

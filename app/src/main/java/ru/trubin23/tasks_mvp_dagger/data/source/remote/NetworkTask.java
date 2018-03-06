@@ -29,17 +29,7 @@ class NetworkTask {
 
     @SerializedName("completed")
     @Expose
-    private Byte mCompleted;
-
-    NetworkTask(@NonNull String id, @NonNull String title,
-                @NonNull String description, @NonNull String dateOfCreation,
-                @NonNull Byte completed) {
-        mId = id;
-        mTitle = title;
-        mDescription = description;
-        mDateOfCreation = dateOfCreation;
-        mCompleted = completed;
-    }
+    private Integer mCompleted;
 
     NetworkTask(@NonNull String id, @NonNull String title,
                 @NonNull String description, @NonNull String dateOfCreation,
@@ -48,7 +38,7 @@ class NetworkTask {
         mTitle = title;
         mDescription = description;
         mDateOfCreation = dateOfCreation;
-        mCompleted = (byte) (completed ? 1 : 0);
+        mCompleted = StatusOfTask.booleanToInteger(completed);
     }
 
     @NonNull
@@ -88,11 +78,11 @@ class NetworkTask {
     }
 
     @NonNull
-    Byte getCompleted() {
+    Integer getCompleted() {
         return mCompleted;
     }
 
-    void setCompleted(@NonNull Byte completed) {
+    void setCompleted(@NonNull Integer completed) {
         mCompleted = completed;
     }
 }
