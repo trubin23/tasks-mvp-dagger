@@ -19,13 +19,14 @@ public interface TasksDataSource {
         void onDataNotAvailable();
 
     }
-    interface GetTaskCallback{
 
+    interface GetTaskCallback {
         void onTaskLoaded(@NonNull Task task);
 
         void onDataNotAvailable();
 
     }
+
     void getTasks(@NonNull LoadTasksCallback callback);
 
     void getTask(@NonNull String taskId, @NonNull GetTaskCallback callback);
@@ -37,4 +38,6 @@ public interface TasksDataSource {
     void deleteTask(@NonNull String taskId);
 
     void completeTask(@NonNull String taskId, boolean completed);
+
+    void clearCompletedTasks();
 }

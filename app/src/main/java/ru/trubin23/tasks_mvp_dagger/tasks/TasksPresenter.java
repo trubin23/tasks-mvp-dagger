@@ -68,6 +68,6 @@ public class TasksPresenter implements TasksContract.Presenter {
 
     @Override
     public void clearCompletedTasks() {
-
+        mTasksRepository.clearCompletedTasks();
     }
 }

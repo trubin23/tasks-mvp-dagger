@@ -86,4 +86,9 @@ public class TasksRemoteRepository implements TasksDataSource {
         mNetworkIO.execute(() -> RetrofitClient.completeTask(
                 taskId, statusOfTask, new ProcessingResponse<>()));
     }
+
+    @Override
+    public void clearCompletedTasks() {
+
+    }
 }
