@@ -34,7 +34,11 @@ public class AddEditTaskActivity extends DaggerAppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            if (mTaskId == null) {
+                actionBar.setTitle(R.string.add_task);
+            } else {
+                actionBar.setTitle(R.string.edit_task);
+            }
         }
 
         AddEditTaskFragment fragment = (AddEditTaskFragment) getSupportFragmentManager()
@@ -45,5 +49,11 @@ public class AddEditTaskActivity extends DaggerAppCompatActivity {
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                     fragment, R.id.content_frame);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

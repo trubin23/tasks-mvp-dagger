@@ -9,4 +9,6 @@
     <string name="menu_filter">Filter</string>
     <string name="menu_clear">Clear completed</string>
     <string name="menu_refresh">Refresh</string>
+    <string name="edit_task">Edit task</string>
+    <string name="add_task">New task</string>
 </resources>

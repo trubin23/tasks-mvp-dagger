@@ -27,7 +27,6 @@ public class TaskDetailActivity extends DaggerAppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
         TaskDetailFragment taskDetailFragment = (TaskDetailFragment) getSupportFragmentManager()
@@ -37,5 +36,11 @@ public class TaskDetailActivity extends DaggerAppCompatActivity {
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                     taskDetailFragment, R.id.content_frame);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
