@@ -30,7 +30,8 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void takeView(@NonNull TasksContract.View view) {
         mTasksView = view;
-        loadTasks();
+        loadTasks(mRefreshTasks);
+        mRefreshTasks = false;
     }
 
     @Override
@@ -38,10 +39,9 @@ public class TasksPresenter implements TasksContract.Presenter {
         mTasksView = null;
     }
 
-    public void loadTasks() {
-        if (mRefreshTasks) {
+    public void loadTasks(boolean forceUpdate) {
+        if (forceUpdate) {
             mTasksRepository.refreshTasks();
-            mRefreshTasks = false;
         }
 
         mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
@@ -64,5 +64,10 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void changeCompletedTask(@NonNull String taskId, boolean completed) {
         mTasksRepository.completeTask(taskId, completed);
+    }
+
+    @Override
+    public void clearCompletedTasks() {
+
     }
 }

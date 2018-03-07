@@ -23,8 +23,10 @@ public interface TasksContract {
 
     interface Presenter extends BasePresenter<View> {
 
-        void loadTasks();
+        void loadTasks(boolean forceUpdate);
 
         void changeCompletedTask(@NonNull String taskId, boolean completed);
+
+        void clearCompletedTasks();
     }
 }

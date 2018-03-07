@@ -9,6 +9,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -84,6 +87,31 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
     public void onPause() {
         mPresenter.dropView();
         super.onPause();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.tasks_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_filter:
+                showFilteringPopUpMenu();
+                return true;
+            case R.id.menu_refresh:
+                mPresenter.loadTasks(true);
+                return true;
+            case R.id.menu_clear:
+                mPresenter.clearCompletedTasks();
+                return true;
+        }
+        return false;
+    }
+
+    private void showFilteringPopUpMenu() {
+
     }
 
     private void showTaskDetail(@NonNull String taskId) {
