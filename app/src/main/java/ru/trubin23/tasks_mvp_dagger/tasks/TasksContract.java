@@ -16,9 +16,15 @@ public interface TasksContract {
 
     interface View extends BaseView<Presenter> {
 
+        void showTasks(@NonNull List<Task> tasks);
+
         void showLoadingTasksError();
 
-        void showTasks(@NonNull List<Task> tasks);
+        void showCompletedTasksCleared();
+
+        void showTaskMarkedActive();
+
+        void showTaskMarkedComplete();
     }
 
     interface Presenter extends BasePresenter<View> {

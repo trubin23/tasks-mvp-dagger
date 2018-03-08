@@ -137,6 +137,21 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
         showMessage(getString(R.string.loading_tasks_error));
     }
 
+    @Override
+    public void showCompletedTasksCleared() {
+        showMessage(getString(R.string.completed_tasks_cleared));
+    }
+
+    @Override
+    public void showTaskMarkedActive() {
+        showMessage(getString(R.string.task_marked_active));
+    }
+
+    @Override
+    public void showTaskMarkedComplete() {
+        showMessage(getString(R.string.task_marked_complete));
+    }
+
     private void showMessage(String message) {
         View view = getView();
         if (view != null) {

@@ -64,10 +64,21 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void changeCompletedTask(@NonNull String taskId, boolean completed) {
         mTasksRepository.completeTask(taskId, completed);
+        if (mTasksView != null){
+            if (completed) {
+                mTasksView.showTaskMarkedComplete();
+            } else {
+                mTasksView.showTaskMarkedActive();
+            }
+        }
     }
 
     @Override
     public void clearCompletedTasks() {
         mTasksRepository.clearCompletedTasks();
+        if (mTasksView != null){
+            mTasksView.showCompletedTasksCleared();
+        }
+        loadTasks(false);
     }
 }
