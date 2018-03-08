@@ -61,4 +61,9 @@ class RetrofitClient {
         RemoteService remoteService = getRemoteService();
         remoteService.deleteTask(taskId).enqueue(callback);
     }
+
+    static void deleteCompletedTasks(@NonNull Callback<Integer> callback){
+        RemoteService remoteService = getRemoteService();
+        remoteService.deleteCompletedTasks().enqueue(callback);
+    }
 }

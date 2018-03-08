@@ -89,6 +89,7 @@ public class TasksRemoteRepository implements TasksDataSource {
 
     @Override
     public void clearCompletedTasks() {
-
+        mNetworkIO.execute(() -> RetrofitClient.deleteCompletedTasks(
+                new ProcessingResponse<>()));
     }
 }

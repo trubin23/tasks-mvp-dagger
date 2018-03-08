@@ -63,6 +63,8 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
         View root = inflater.inflate(R.layout.tasks_frag, container, false);
         ButterKnife.bind(this, root);
 
+        setHasOptionsMenu(true);
+
         RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mTasksAdapter);

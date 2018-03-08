@@ -33,4 +33,7 @@ interface RemoteService {
 
     @DELETE("/api_dagger/tasks/{id}")
     Call<NetworkTask> deleteTask(@Path("id") String id);
+
+    @DELETE("/api_dagger/tasks/completed")
+    Call<Integer> deleteCompletedTasks();
 }
