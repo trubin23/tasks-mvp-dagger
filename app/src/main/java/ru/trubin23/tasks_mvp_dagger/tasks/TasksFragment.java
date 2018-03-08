@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -113,7 +114,27 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
     }
 
     private void showFilteringPopUpMenu() {
+        PopupMenu popupMenu = new PopupMenu(getContext(),
+                getActivity().findViewById(R.id.menu_filter));
+        popupMenu.getMenuInflater().inflate(R.menu.filter_tasks, popupMenu.getMenu());
 
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()){
+                case R.id.tasks_active:
+                    mPresenter.setFiltering(TasksFilter.ACTIVE_TASKS);
+                    break;
+                case R.id.tasks_completed:
+                    mPresenter.setFiltering(TasksFilter.COMPLETED_TASKS);
+                    break;
+                default:
+                    mPresenter.setFiltering(TasksFilter.ALL_TASKS);
+                    break;
+            }
+            mPresenter.loadTasks(false);
+            return true;
+        });
+
+        popupMenu.show();
     }
 
     private void showTaskDetail(@NonNull String taskId) {

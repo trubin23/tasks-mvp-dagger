@@ -81,4 +81,9 @@ public class TasksPresenter implements TasksContract.Presenter {
         }
         loadTasks(false);
     }
+
+    @Override
+    public void setFiltering(TasksFilter activeTasks) {
+
+    }
 }

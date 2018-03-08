@@ -34,5 +34,7 @@ public interface TasksContract {
         void changeCompletedTask(@NonNull String taskId, boolean completed);
 
         void clearCompletedTasks();
+
+        void setFiltering(TasksFilter activeTasks);
     }
 }
