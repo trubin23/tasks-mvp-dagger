@@ -15,11 +15,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import ru.trubin23.tasks_mvp_dagger.R;
@@ -40,6 +42,12 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
 
     @Inject
     TasksContract.Presenter mPresenter;
+
+    @BindView(R.id.list_tasks)
+    LinearLayout mTasksView;
+
+    @BindView(R.id.no_tasks)
+    LinearLayout mNoTasksView;
 
     @Inject
     public TasksFragment() {
@@ -99,7 +107,7 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_filter:
                 showFilteringPopUpMenu();
                 return true;
@@ -119,7 +127,7 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
         popupMenu.getMenuInflater().inflate(R.menu.filter_tasks, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
                 case R.id.tasks_active:
                     mPresenter.setFiltering(TasksFilter.ACTIVE_TASKS);
                     break;
@@ -182,16 +190,20 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
 
     @Override
     public void showNoActiveTasks() {
-
+        showNoTasksViews(R.string.no_tasks_active, R.drawable.ic_check_circle);
     }
 
     @Override
     public void showNoCompletedTasks() {
-
+        showNoTasksViews(R.string.no_tasks_completed, R.drawable.ic_check_box);
     }
 
     @Override
     public void showNoTasks() {
+        showNoTasksViews(R.string.no_tasks_all, R.drawable.ic_verified);
+    }
+
+    void showNoTasksViews(int textRes, int iconRes) {
 
     }
 
