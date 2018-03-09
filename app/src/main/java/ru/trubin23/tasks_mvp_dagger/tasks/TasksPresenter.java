@@ -65,18 +65,18 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     @NonNull
-    private List<Task> filterTask(@NonNull List<Task> tasks){
+    private List<Task> filterTask(@NonNull List<Task> tasks) {
         List<Task> tasksToShow = new ArrayList<>();
 
         for (Task task : tasks) {
-            switch (mCurrentFiltering){
+            switch (mCurrentFiltering) {
                 case ACTIVE_TASKS:
-                    if (!task.isCompleted()){
+                    if (!task.isCompleted()) {
                         tasksToShow.add(task);
                     }
                     break;
                 case COMPLETED_TASKS:
-                    if (task.isCompleted()){
+                    if (task.isCompleted()) {
                         tasksToShow.add(task);
                     }
                     break;
@@ -93,22 +93,48 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     private void showTasks(@NonNull List<Task> tasks) {
-//        if (tasks.isEmpty()){
-//            showEmptyTasks();
-//        } else {
-//            if (mTasksView != null){
+        if (tasks.isEmpty()) {
+            showEmptyTasks();
+        } else {
+            if (mTasksView != null) {
                 mTasksView.showTasks(tasks);
-//            }
-//            showFilterLabel();
-//        }
+            }
+            showFilterLabel();
+        }
     }
 
     private void showEmptyTasks() {
-
+        if (mTasksView == null) {
+            return;
+        }
+        switch (mCurrentFiltering) {
+            case ACTIVE_TASKS:
+                mTasksView.showNoActiveTasks();
+                break;
+            case COMPLETED_TASKS:
+                mTasksView.showNoCompletedTasks();
+                break;
+            case ALL_TASKS:
+                mTasksView.showNoTasks();
+                break;
+        }
     }
 
     private void showFilterLabel() {
-
+        if (mTasksView == null) {
+            return;
+        }
+        switch (mCurrentFiltering) {
+            case ACTIVE_TASKS:
+                mTasksView.showActiveFilterLabel();
+                break;
+            case COMPLETED_TASKS:
+                mTasksView.showCompletedFilterLabel();
+                break;
+            case ALL_TASKS:
+                mTasksView.showAllFilterLabel();
+                break;
+        }
     }
 
     @Override

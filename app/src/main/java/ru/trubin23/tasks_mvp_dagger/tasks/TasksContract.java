@@ -25,6 +25,18 @@ public interface TasksContract {
         void showTaskMarkedActive();
 
         void showTaskMarkedComplete();
+
+        void showNoActiveTasks();
+
+        void showNoCompletedTasks();
+
+        void showNoTasks();
+
+        void showActiveFilterLabel();
+
+        void showCompletedFilterLabel();
+
+        void showAllFilterLabel();
     }
 
     interface Presenter extends BasePresenter<View> {

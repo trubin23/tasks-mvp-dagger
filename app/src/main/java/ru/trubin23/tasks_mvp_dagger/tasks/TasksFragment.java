@@ -179,4 +179,34 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
             Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
         }
     }
+
+    @Override
+    public void showNoActiveTasks() {
+
+    }
+
+    @Override
+    public void showNoCompletedTasks() {
+
+    }
+
+    @Override
+    public void showNoTasks() {
+
+    }
+
+    @Override
+    public void showActiveFilterLabel() {
+
+    }
+
+    @Override
+    public void showCompletedFilterLabel() {
+
+    }
+
+    @Override
+    public void showAllFilterLabel() {
+
+    }
 }
