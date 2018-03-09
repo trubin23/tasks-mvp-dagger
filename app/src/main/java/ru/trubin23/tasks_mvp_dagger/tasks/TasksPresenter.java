@@ -2,6 +2,7 @@ package ru.trubin23.tasks_mvp_dagger.tasks;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,6 +20,8 @@ public class TasksPresenter implements TasksContract.Presenter {
     private final TasksRepository mTasksRepository;
 
     private TasksContract.View mTasksView;
+
+    private TasksFilter mCurrentFiltering = TasksFilter.ALL_TASKS;
 
     private boolean mRefreshTasks = true;
 
@@ -47,9 +50,9 @@ public class TasksPresenter implements TasksContract.Presenter {
         mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
             @Override
             public void onTasksLoaded(@NonNull List<Task> tasks) {
-                if (mTasksView != null) {
-                    mTasksView.showTasks(tasks);
-                }
+                List<Task> tasksToShow = filterTask(tasks);
+
+                showTasks(tasksToShow);
             }
 
             @Override
@@ -61,10 +64,57 @@ public class TasksPresenter implements TasksContract.Presenter {
         });
     }
 
+    @NonNull
+    private List<Task> filterTask(@NonNull List<Task> tasks){
+        List<Task> tasksToShow = new ArrayList<>();
+
+        for (Task task : tasks) {
+            switch (mCurrentFiltering){
+                case ACTIVE_TASKS:
+                    if (!task.isCompleted()){
+                        tasksToShow.add(task);
+                    }
+                    break;
+                case COMPLETED_TASKS:
+                    if (task.isCompleted()){
+                        tasksToShow.add(task);
+                    }
+                    break;
+                case ALL_TASKS:
+                    tasksToShow.add(task);
+                    break;
+                default:
+                    tasksToShow.add(task);
+                    break;
+            }
+        }
+
+        return tasksToShow;
+    }
+
+    private void showTasks(@NonNull List<Task> tasks) {
+//        if (tasks.isEmpty()){
+//            showEmptyTasks();
+//        } else {
+//            if (mTasksView != null){
+                mTasksView.showTasks(tasks);
+//            }
+//            showFilterLabel();
+//        }
+    }
+
+    private void showEmptyTasks() {
+
+    }
+
+    private void showFilterLabel() {
+
+    }
+
     @Override
     public void changeCompletedTask(@NonNull String taskId, boolean completed) {
         mTasksRepository.completeTask(taskId, completed);
-        if (mTasksView != null){
+        if (mTasksView != null) {
             if (completed) {
                 mTasksView.showTaskMarkedComplete();
             } else {
@@ -76,14 +126,14 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void clearCompletedTasks() {
         mTasksRepository.clearCompletedTasks();
-        if (mTasksView != null){
+        if (mTasksView != null) {
             mTasksView.showCompletedTasksCleared();
         }
         loadTasks(false);
     }
 
     @Override
-    public void setFiltering(TasksFilter activeTasks) {
+    public void setFiltering(@NonNull TasksFilter activeTasks) {
 
     }
 }

@@ -35,6 +35,6 @@ public interface TasksContract {
 
         void clearCompletedTasks();
 
-        void setFiltering(TasksFilter activeTasks);
+        void setFiltering(@NonNull TasksFilter activeTasks);
     }
 }
