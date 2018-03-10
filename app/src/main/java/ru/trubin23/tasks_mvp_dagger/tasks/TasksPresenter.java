@@ -160,6 +160,6 @@ public class TasksPresenter implements TasksContract.Presenter {
 
     @Override
     public void setFiltering(@NonNull TasksFilter activeTasks) {
-
+        mCurrentFiltering = activeTasks;
     }
 }

@@ -15,7 +15,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -46,8 +48,17 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
     @BindView(R.id.list_tasks)
     LinearLayout mTasksView;
 
+    @BindView(R.id.filtering_label)
+    TextView mFilteringLabel;
+
     @BindView(R.id.no_tasks)
     LinearLayout mNoTasksView;
+
+    @BindView(R.id.no_tasks_icon)
+    ImageView mNoTasksIcon;
+
+    @BindView(R.id.no_tasks_text)
+    TextView mNoTasksText;
 
     @Inject
     public TasksFragment() {
@@ -158,7 +169,11 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
 
     @Override
     public void showTasks(@NonNull List<Task> tasks) {
-        getActivity().runOnUiThread(() -> mTasksAdapter.setTasks(tasks));
+        getActivity().runOnUiThread(() -> {
+            mTasksAdapter.setTasks(tasks);
+            mTasksView.setVisibility(View.VISIBLE);
+            mNoTasksView.setVisibility(View.GONE);
+        });
     }
 
     @Override
@@ -204,21 +219,25 @@ public class TasksFragment extends DaggerFragment implements TasksContract.View 
     }
 
     void showNoTasksViews(int textRes, int iconRes) {
+        mTasksView.setVisibility(View.GONE);
 
+        mNoTasksView.setVisibility(View.VISIBLE);
+        mNoTasksIcon.setImageDrawable(getResources().getDrawable(iconRes));
+        mNoTasksText.setText(textRes);
     }
 
     @Override
     public void showActiveFilterLabel() {
-
+        mFilteringLabel.setText(R.string.label_active);
     }
 
     @Override
     public void showCompletedFilterLabel() {
-
+        mFilteringLabel.setText(R.string.label_completed);
     }
 
     @Override
     public void showAllFilterLabel() {
-
+        mFilteringLabel.setText(R.string.label_all);
     }
 }
